@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { getTasks, addTaskToStorage } from "../Utils/Storage";
+import ListData from './ListData';
+import './TaskAdd.css'
+import Stats from './Stats';
+
 const TaskAdd = () => {
   const [tasks, setTasks] = useState(getTasks()); 
   const [inputVal, setInputVal] = useState("");
@@ -10,10 +14,11 @@ const TaskAdd = () => {
       return;
     }
 
-    const updatedTasks = addTaskToStorage(inputVal); 
-    setTasks(updatedTasks); 
+     addTaskToStorage(inputVal); 
+    setTasks(getTasks()); 
     setInputVal(""); 
   };
+
 
   return (
     <div>
@@ -25,11 +30,10 @@ const TaskAdd = () => {
       />
       <button onClick={addTask}>Add Task</button>
 
-      <ul>
-        {tasks.map((t, index) => (
-          <li key={index}>{t}</li>
-        ))}
-      </ul>
+<ListData tasks={tasks} key={tasks} />
+
+        <Stats tasks={tasks}/>
+
     </div>
   );
 };

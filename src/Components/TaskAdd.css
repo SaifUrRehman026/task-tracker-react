@@ -33,3 +33,22 @@
   transition: 0.3s;
   /* border-radius: 0; */
 }
+
+
+.totalTasks{
+  margin-right: 30px;
+}
+
+.completeTasks{
+  margin-right: 30px;
+}
+
+h1{
+  margin-bottom: 10px;
+  /* margin-left: 20px; */
+}
+
+.distance{
+  margin-left: 20px;
+}
+

@@ -14,9 +14,11 @@ export const saveTasks = (tasks) => {
 export const addTaskToStorage = (task) => {
   const tasks = getTasks();
   const newtask={
-    id:Date.now();
+    id:Date.now(),
+    Task:task,
+    Status:"undo"
   }
-  tasks.push(task);
+  tasks.push(newtask);
   saveTasks(tasks);
   return tasks; // return updated list
 };

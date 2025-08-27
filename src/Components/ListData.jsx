@@ -1,26 +1,7 @@
-import React,{useState} from 'react'
 import './ListData.css'
 import { getTasks, addTaskToStorage } from "../Utils/Storage";
-const ListData = () => {
-       const [tasks, setTasks] = useState(getTasks()); 
-
-    const deleteTask=(taskId)=>{
-    let dataArray = JSON.parse(localStorage.getItem("dataArray")) || [];
-    dataArray = dataArray.filter(task => task.id !== taskId);
-    localStorage.setItem("dataArray", JSON.stringify(dataArray));
-    setTasks(dataArray);
-  };
-
-    const toggleStatus = (taskId) => {
-    let dataArray = JSON.parse(localStorage.getItem("dataArray")) || [];
-    dataArray = dataArray.map(task =>
-      task.id === taskId
-        ? { ...task, Status: task.Status === "complete" ? "undo" : "complete" }
-        : task
-    );
-    localStorage.setItem("dataArray", JSON.stringify(dataArray));
-    setTasks(dataArray); // ✅ update after status toggle
-  };
+const ListData = ({tasks, deleteTask, toggleStatus}) => {
+      
   return (
     <div className='list'>
       

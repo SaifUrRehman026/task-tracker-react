@@ -19,18 +19,37 @@ const TaskAdd = () => {
     setInputVal(""); 
   };
 
+   const deleteTask=(taskId)=>{
+    let dataArray = JSON.parse(localStorage.getItem("dataArray")) || [];
+    dataArray = dataArray.filter(task => task.id !== taskId);
+    localStorage.setItem("dataArray", JSON.stringify(dataArray));
+    setTasks(dataArray);
+  };
+
+    const toggleStatus = (taskId) => {
+    let dataArray = JSON.parse(localStorage.getItem("dataArray")) || [];
+    dataArray = dataArray.map(task =>
+      task.id === taskId
+        ? { ...task, Status: task.Status === "complete" ? "undo" : "complete" }
+        : task
+    );
+    localStorage.setItem("dataArray", JSON.stringify(dataArray));
+    setTasks(dataArray); 
+  };
+
+
 
   return (
     <div>
-      <input
+      <input 
         type="text"
         value={inputVal}
         onChange={(e) => setInputVal(e.target.value)}
         placeholder="Enter task here"
       />
-      <button onClick={addTask}>Add Task</button>
+      <button  onClick={addTask}>Add Task</button>
 
-<ListData tasks={tasks} key={tasks} />
+<ListData tasks={tasks} deleteTask={deleteTask} toggleStatus={toggleStatus}/>
 
         <Stats tasks={tasks}/>
 
